@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <link href="home.css" rel="stylesheet">
+    </head>
+ 
+    <body>
+        <div class="site-wrapper">
+    
+            <div class="site-wrapper-inner">
+            
+            <div class="cover-container">
+            
+            <div class="masthead clearfix">
+            <div class="inner">
+            <h3 class="masthead-brand">Vos</h3>
+            <nav>
+            <ul class="nav masthead-nav">
+            <li><a href="menu.html">Menu</a></li>
+            <li class = "active"><a href="entry.html">New Entry</a></li>
+            <li><a href="database.html">Database</a></li>
+            </ul>
+            </nav>
+            </div>
+            <h1 class="cover-heading">New Entry</h1>
+            <div class = "center">
+            <div id = "chart_div">
+            </div>
+            </div>
+    
+            </div>
+            
+            <form id="classmateForm" action="result.html" method="get">
+                <label for="name">Classmate Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                
+                <label for="garlic">Do they eat garlic?</label>
+                <select id="garlic" name="garlic">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select><br><br>
+              
+                <label for="shadow">Do they have a shadow?</label>
+                <select id="shadow" name="shadow">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select><br><br>
+              
+                <label for="complexion">Do they have a pale complexion?</label>
+                <select id="complexion" name="complexion">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select><br><br>
+              
+                <label for="accent">Do they speak with an accent?</label>
+                <select id="accent" name="accent">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select><br><br>
+              
+                <button type="submit">Submit</button>
+              </form>
+
+              <script>
+                document.getElementById("classmateForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    
+                    // Get form values
+                    var name = document.getElementById("name").value;
+                    var garlic = document.getElementById("garlic").value;
+                    var shadow = document.getElementById("shadow").value;
+                    var complexion = document.getElementById("complexion").value;
+                    var accent = document.getElementById("accent").value;
+                    
+                    // Calculate score
+                    var score = 0;
+                    if (shadow === "no") score += 4;
+                    if (complexion === "yes") score += 3;
+                    if (garlic === "no") score += 3;
+
+                    var entry = {
+                        name: name,
+                        garlic: garlic,
+                        shadow: shadow,
+                        complexion: complexion,
+                        accent: accent,
+                        score: score
+                    };
+                    
+                    var entries = JSON.parse(localStorage.getItem('entries')) || [];
+                    
+                    entries.push(entry);
+
+                    localStorage.setItem('entries', JSON.stringify(entries));
+
+                    window.location.href = "database.html";
+                    
+                    
+                });
+                
+            
+              </script>
+            
+            
+            <div class="mastfoot">
+            <div class="inner">
+            </div>
+            </div>
+            
+            </div>
+            
+            </div>
+            
+            </div>
+        </body>
+</html>
